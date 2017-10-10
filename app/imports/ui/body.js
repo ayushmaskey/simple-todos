@@ -2,32 +2,35 @@
 import { Template } from 'meteor/templating';
 
 import { Tasks } from '../api/tasks.js';
+
+import './task.js';
 import './body.html';
 
-Template.body.helpers({
+Template.body.helpers({         //used to pass data into template
+
   tasks() {
     return Tasks.find({}, {sort: {createdAt: -1 } });
   },
+
 });
 
-Template.body.events({
+Template.body.events({      //watch of any of the events in whole body tag
 
-  //key value pair of event {submit: value Entered in form}
-  'submit .new-task'(event) {
-    //prevents default browser form submit??
-    event.preventDefault();
+  'submit .new-task'(event) {     //key value pair of event
+                                  //{submit: value Entered in form}
+    event.preventDefault();       //prevents default browser form submit??
 
-    //get value from form - event
-    const text = event.target.text.value;
+    const text = event.target.text.value;   //get value from form - event
 
-    Tasks.insert({
+    Tasks.insert({                  //insert into collection
       text,
       createdAt: new Date(),
     });
 
-    // console.log(event); // see the values available in event
+    // console.log(event);            // see the values available in event
 
-    //clear form
-    event.target.text.value = '';
-  }
-})
+    event.target.text.value = '';       //clear form
+  },
+
+
+});
