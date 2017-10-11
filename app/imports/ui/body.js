@@ -37,12 +37,15 @@ Template.body.events({      //watch of any of the events in whole body tag
 
     const text = event.target.text.value;   //get value from form - event
 
-    Tasks.insert({                  //insert into collection
-      text,
-      createdAt: new Date(),
-      owner: Meteor.userId(),
-      username: Meteor.user().username,
-    });
+    // Tasks.insert({                  //insert into collection
+    //   text,
+    //   createdAt: new Date(),
+    //   owner: Meteor.userId(),
+    //   username: Meteor.user().username,
+    // });
+
+    //Tasks.insert (above) replaced by tasks.insert (below) after adding Meteor method in api/tasks.js - make sure right user is inserting and deleting todos
+    Meteor.call('tasks.insert', text);
 
     // console.log(event);            // see the values available in event
 
