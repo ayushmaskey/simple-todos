@@ -1,4 +1,5 @@
 
+import { Meteor } from 'meteor/meteor';
 import { Template } from 'meteor/templating';
 import { ReactiveDict } from 'meteor/reactive-dict';
 
@@ -39,6 +40,8 @@ Template.body.events({      //watch of any of the events in whole body tag
     Tasks.insert({                  //insert into collection
       text,
       createdAt: new Date(),
+      owner: Meteor.userId(),
+      username: Meteor.user().username,
     });
 
     // console.log(event);            // see the values available in event
